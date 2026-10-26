@@ -567,7 +567,11 @@ function resolveLegacyCompatibilitySelection(options = {}) {
 
 function resolveInstallPlan(options = {}) {
   const manifests = loadInstallManifests(options);
-  const requestedProfileId = options.profileId || null;
+  const rawRequestedProfileIds = [
+    ...(Array.isArray(options.profileIds) ? options.profileIds : (options.profileIds ? String(options.profileIds).split(',') : [])),
+    ...(options.profileId ? String(options.profileId).split(',') : []),
+  ];
+  const requestedProfileIds = dedupeStrings(rawRequestedProfileIds);
   const explicitModuleIds = dedupeStrings(options.moduleIds);
   const includedComponentIds = dedupeStrings(options.includeComponentIds);
   const excludedComponentIds = dedupeStrings(options.excludeComponentIds);
@@ -580,21 +584,24 @@ function resolveInstallPlan(options = {}) {
     );
   }
 
-  const shouldUseTargetDefaultProfile = !requestedProfileId
+  const shouldUseTargetDefaultProfile = requestedProfileIds.length === 0
     && explicitModuleIds.length === 0
     && includedComponentIds.length === 0;
   const targetDefaultProfileId = shouldUseTargetDefaultProfile
     ? getTargetDefaultProfileId(target, manifests)
     : null;
-  const profileId = requestedProfileId || targetDefaultProfileId;
+  const profileIds = requestedProfileIds.length > 0
+    ? requestedProfileIds
+    : (targetDefaultProfileId ? [targetDefaultProfileId] : []);
+  const profileId = profileIds[0] || null;
   const targetDefaultExclusions = targetDefaultProfileId
     ? getTargetDefaultExclusions(target, manifests)
     : [];
 
-  if (profileId) {
-    const profile = manifests.profiles[profileId];
+  for (const pId of profileIds) {
+    const profile = manifests.profiles[pId];
     if (!profile) {
-      throw new Error(`Unknown install profile: ${profileId}`);
+      throw new Error(`Unknown install profile: ${pId}`);
     }
     requestedModuleIds.push(...profile.modules);
   }
@@ -749,6 +756,7 @@ function resolveInstallPlan(options = {}) {
   return {
     repoRoot: manifests.repoRoot,
     profileId,
+    profileIds: [...profileIds],
     target,
     requestedModuleIds: effectiveRequestedIds,
     explicitModuleIds,

@@ -291,13 +291,14 @@ function runTests() {
         'rules-core',
         'agents-core',
         'commands-core',
+        'hooks-runtime',
         'platform-configs',
         'skill-unified-memory',
         'workflow-quality',
         'shared-script-utils'
       ]
     );
-    assert.ok(plan.skippedModuleIds.includes('hooks-runtime'));
+    assert.ok(plan.selectedModuleIds.includes('hooks-runtime'));
     assert.ok(!plan.skippedModuleIds.includes('platform-configs'));
     assert.ok(!plan.skippedModuleIds.includes('workflow-quality'));
     assert.strictEqual(plan.targetAdapterId, 'antigravity-project');
@@ -576,7 +577,7 @@ function runTests() {
     assert.deepStrictEqual(selection.ruleLanguages, ['cpp', 'golang', 'kotlin']);
     assert.deepStrictEqual(
       selection.moduleIds,
-      ['rules-core', 'agents-core', 'commands-core', 'skill-unified-memory', 'workflow-quality']
+      ['rules-core', 'agents-core', 'commands-core', 'hooks-runtime', 'platform-configs', 'skill-unified-memory', 'workflow-quality']
     );
   })) passed++; else failed++;
 
@@ -638,7 +639,27 @@ function runTests() {
   if (test('throws on unknown install profile', () => {
     assert.throws(
       () => resolveInstallPlan({ profileId: 'ghost-profile' }),
-      /Unknown install profile/
+      /Unknown install profile: ghost-profile/
+    );
+  })) passed++; else failed++;
+
+  if (test('resolves multi-profile plan and merges modules', () => {
+    const plan = resolveInstallPlan({
+      profileIds: ['minimal', 'security'],
+      target: 'claude',
+      projectRoot: '/workspace/app',
+    });
+
+    assert.deepStrictEqual(plan.profileIds, ['minimal', 'security']);
+    assert.strictEqual(plan.profileId, 'minimal');
+    assert.ok(plan.selectedModuleIds.includes('rules-core'), 'should include rules-core');
+    assert.ok(plan.selectedModuleIds.includes('security'), 'should include security module from security profile');
+  })) passed++; else failed++;
+
+  if (test('rejects unknown profile when multiple profiles are requested', () => {
+    assert.throws(
+      () => resolveInstallPlan({ profileIds: ['minimal', 'non-existent-profile'] }),
+      /Unknown install profile: non-existent-profile/
     );
   })) passed++; else failed++;
 
