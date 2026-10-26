@@ -1,0 +1,54 @@
+name: Antigravity Parity CI
+
+on:
+  push:
+    branches: [ main, 'feature/**', 'antigravity/**' ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  antigravity-tests:
+    name: Antigravity Suite (${{ matrix.os }}, Node ${{ matrix.node-version }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node-version: [18.x, 20.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --ignore-scripts --no-audit --no-fund
+
+      - name: Run Antigravity Agent Transform Tests
+        run: node tests/antigravity-agent-transform.test.js
+
+      - name: Run Antigravity Hook Dispatcher Tests
+        run: node tests/antigravity-hook-dispatcher.test.js
+
+      - name: Run Target Adapter Tests
+        run: node tests/lib/install-targets.test.js
+
+      - name: Run Harness Adapter Compliance Check
+        run: node scripts/harness-adapter-compliance.js --check
+
+      - name: Test Antigravity Scaffolding (POSIX)
+        if: runner.os != 'Windows'
+        run: |
+          ./install.sh --target antigravity --profile minimal --dry-run
+          ./install.sh --target antigravity-home --profile minimal --dry-run
+
+      - name: Test Antigravity Scaffolding (Windows PowerShell)
+        if: runner.os == 'Windows'
+        run: |
+          .\install.ps1 --target antigravity --profile minimal --dry-run
+          .\install.ps1 --target antigravity-home --profile minimal --dry-run
