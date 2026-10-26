@@ -20,26 +20,29 @@ npx ecc-universal@2.2.3 install --profile minimal --target antigravity
 
 ### Source checkout alternative
 
+You can install ECC globally across all workspaces or locally to a project.
+
+#### Global user installation (recommended for Antigravity IDE and Xcode):
 ```bash
-# Run every command below from the project you want to configure.
-# Keep the ECC source checkout separate and use its absolute path.
-ECC_ROOT="/absolute/path/to/ECC"
-
-# Install the minimal profile
-"$ECC_ROOT/install.sh" --profile minimal --target antigravity
-
-# Compatibility syntax: common rules plus only these language packs
-"$ECC_ROOT/install.sh" --target antigravity typescript python go
+./install.sh --target antigravity-home --profiles java,data,frontend
 ```
 
-PowerShell uses the same project-root working-directory contract:
-
+In PowerShell:
 ```powershell
-$EccRoot = "C:\absolute\path\to\ECC"
-
-& "$EccRoot\install.ps1" --profile minimal --target antigravity
-& "$EccRoot\install.ps1" --target antigravity typescript python go
+.\install.ps1 --target antigravity-home --profiles java,data,frontend
 ```
+
+#### Project-local installation:
+```bash
+"$ECC_ROOT/install.sh" --target antigravity --profiles java,data
+```
+
+In PowerShell:
+```powershell
+& "$EccRoot\install.ps1" --target antigravity --profiles java,data
+```
+
+See [ANTIGRAVITY-PARITY-GUIDE.md](ANTIGRAVITY-PARITY-GUIDE.md) for full profile catalogs and Xcode instructions.
 
 Start a new Antigravity conversation after installing so the agent receives the
 updated skill inventory.
