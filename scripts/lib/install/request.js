@@ -18,6 +18,7 @@ function normalizeSkillComponentIds(rawValue) {
 
 function parseInstallArgs(argv) {
   const args = argv.slice(2);
+  const profileIds = [];
   const parsed = {
     target: null,
     dryRun: false,
@@ -25,6 +26,7 @@ function parseInstallArgs(argv) {
     help: false,
     configPath: null,
     profileId: null,
+    profileIds: [],
     moduleIds: [],
     includeComponentIds: [],
     excludeComponentIds: [],
@@ -43,8 +45,11 @@ function parseInstallArgs(argv) {
     } else if (arg === '--config') {
       parsed.configPath = args[index + 1] || null;
       index += 1;
-    } else if (arg === '--profile') {
-      parsed.profileId = args[index + 1] || null;
+    } else if (arg === '--profile' || arg === '--profiles') {
+      const raw = args[index + 1] || '';
+      if (raw.trim()) {
+        profileIds.push(...raw.split(','));
+      }
       index += 1;
     } else if (arg === '--modules') {
       const raw = args[index + 1] || '';
@@ -94,6 +99,8 @@ function parseInstallArgs(argv) {
     throw new Error('ECC_DRY_RUN must be "1" or "0" when set');
   }
   parsed.dryRun = parsed.dryRun || dryRunEnv === '1';
+  parsed.profileIds = dedupeStrings(profileIds);
+  parsed.profileId = parsed.profileIds[0] || null;
 
   return parsed;
 }
@@ -102,7 +109,14 @@ function normalizeInstallRequest(options = {}) {
   const config = options.config && typeof options.config === 'object'
     ? options.config
     : null;
-  const profileId = options.profileId || config?.profileId || null;
+  const rawProfileIds = [
+    ...(Array.isArray(options.profileIds) ? options.profileIds : (options.profileIds ? String(options.profileIds).split(',') : [])),
+    ...(options.profileId ? String(options.profileId).split(',') : []),
+    ...(Array.isArray(config?.profileIds) ? config.profileIds : (config?.profileIds ? String(config.profileIds).split(',') : [])),
+    ...(config?.profileId ? String(config.profileId).split(',') : []),
+  ];
+  const profileIds = dedupeStrings(rawProfileIds);
+  const profileId = profileIds[0] || null;
   const target = options.target || config?.target || 'claude';
   const supportsLocale = target === 'claude' || target === 'claude-project';
   const moduleIds = validateInstallModuleIds(
@@ -138,8 +152,8 @@ function normalizeInstallRequest(options = {}) {
   if (hookConsent === 'declined' && moduleIds.includes('hooks-runtime')) {
     throw new Error('--no-hooks cannot be combined with an explicit hooks-runtime module selection');
   }
-  const hasManifestBaseSelection = Boolean(profileId) || moduleIds.length > 0 || includeComponentIds.length > 0;
-  const hasNonLocaleManifestSelection = Boolean(profileId)
+  const hasManifestBaseSelection = profileIds.length > 0 || moduleIds.length > 0 || includeComponentIds.length > 0;
+  const hasNonLocaleManifestSelection = profileIds.length > 0
     || moduleIds.length > 0
     // Install-state persists --locale as a component; auto-update replays it via --with.
     || requestedIncludeComponentIds.some(id => !supportsLocale || !LOCALE_COMPONENT_IDS.has(id))
@@ -162,6 +176,7 @@ function normalizeInstallRequest(options = {}) {
       : (usingManifestMode ? 'manifest' : 'legacy-compat'),
     target,
     profileId,
+    profileIds,
     moduleIds,
     includeComponentIds,
     excludeComponentIds,

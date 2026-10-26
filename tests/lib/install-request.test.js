@@ -52,6 +52,29 @@ function runTests() {
     assert.deepStrictEqual(parsed.languages, []);
   })) passed++; else failed++;
 
+  if (test('parses --profiles argument with comma-separated values', () => {
+    const parsed = parseInstallArgs([
+      'node',
+      'scripts/install-apply.js',
+      '--profiles', 'java,data,frontend',
+    ]);
+
+    assert.deepStrictEqual(parsed.profileIds, ['java', 'data', 'frontend']);
+    assert.strictEqual(parsed.profileId, 'java');
+  })) passed++; else failed++;
+
+  if (test('parses repeated --profile and comma-separated --profile arguments', () => {
+    const parsed = parseInstallArgs([
+      'node',
+      'scripts/install-apply.js',
+      '--profile', 'java,data',
+      '--profile', 'frontend',
+    ]);
+
+    assert.deepStrictEqual(parsed.profileIds, ['java', 'data', 'frontend']);
+    assert.strictEqual(parsed.profileId, 'java');
+  })) passed++; else failed++;
+
   if (test('parses --locale argument', () => {
     const parsed = parseInstallArgs([
       'node',
@@ -241,10 +264,27 @@ function runTests() {
     assert.strictEqual(request.mode, 'manifest');
     assert.strictEqual(request.target, 'cursor');
     assert.strictEqual(request.profileId, 'developer');
+    assert.deepStrictEqual(request.profileIds, ['developer']);
     assert.strictEqual(request.hookConsent, 'enabled');
     assert.deepStrictEqual(request.includeComponentIds, ['lang:typescript']);
     assert.deepStrictEqual(request.excludeComponentIds, ['capability:media']);
     assert.deepStrictEqual(request.legacyLanguages, []);
+  })) passed++; else failed++;
+
+  if (test('normalizes multi-profile requests into canonical profileIds', () => {
+    const request = normalizeInstallRequest({
+      target: 'antigravity-home',
+      profileIds: ['java', 'data', 'frontend'],
+      moduleIds: [],
+      includeComponentIds: [],
+      excludeComponentIds: [],
+      languages: [],
+    });
+
+    assert.strictEqual(request.mode, 'manifest');
+    assert.strictEqual(request.target, 'antigravity-home');
+    assert.strictEqual(request.profileId, 'java');
+    assert.deepStrictEqual(request.profileIds, ['java', 'data', 'frontend']);
   })) passed++; else failed++;
 
   if (test('merges config-backed component selections with CLI overrides', () => {
