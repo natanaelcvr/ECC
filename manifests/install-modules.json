@@ -21,7 +21,8 @@
         "hermes",
         "openclaw",
         "kimi",
-        "adal"
+        "adal",
+        "antigravity-home"
       ],
       "dependencies": [],
       "defaultInstall": true,
@@ -51,7 +52,8 @@
         "hermes",
         "openclaw",
         "kimi",
-        "adal"
+        "adal",
+        "antigravity-home"
       ],
       "dependencies": [],
       "defaultInstall": true,
@@ -86,7 +88,8 @@
         "hermes",
         "openclaw",
         "kimi",
-        "adal"
+        "adal",
+        "antigravity-home"
       ],
       "dependencies": [
         "shared-script-utils"
@@ -109,7 +112,9 @@
         "claude-project",
         "cursor",
         "opencode",
-        "codebuddy"
+        "codebuddy",
+        "antigravity",
+        "antigravity-home"
       ],
       "dependencies": [],
       "defaultInstall": true,
@@ -153,7 +158,8 @@
         ".hermes",
         ".openclaw",
         ".kimi",
-        ".adal"
+        ".adal",
+        ".antigravity-plugin"
       ],
       "targets": [
         "claude",
@@ -171,7 +177,8 @@
         "hermes",
         "openclaw",
         "kimi",
-        "adal"
+        "adal",
+        "antigravity-home"
       ],
       "dependencies": [
         "shared-script-utils"
@@ -268,7 +275,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "antigravity-home"
       ],
       "dependencies": [
         "rules-core",
@@ -310,7 +318,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "antigravity-home"
       ],
       "dependencies": [
         "platform-configs"
@@ -342,7 +351,8 @@
         "hermes",
         "openclaw",
         "kimi",
-        "adal"
+        "adal",
+        "antigravity-home"
       ],
       "dependencies": [
         "platform-configs"
@@ -372,7 +382,8 @@
         "hermes",
         "openclaw",
         "kimi",
-        "adal"
+        "adal",
+        "antigravity-home"
       ],
       "dependencies": [
         "workflow-quality"
@@ -454,7 +465,8 @@
         "hermes",
         "openclaw",
         "kimi",
-        "adal"
+        "adal",
+        "antigravity-home"
       ],
       "dependencies": [
         "skill-unified-memory"
@@ -484,7 +496,8 @@
         "hermes",
         "openclaw",
         "kimi",
-        "adal"
+        "adal",
+        "antigravity-home"
       ],
       "dependencies": [
         "workflow-quality"
@@ -518,7 +531,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "antigravity-home"
       ],
       "dependencies": [
         "workflow-quality",
@@ -567,7 +581,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "antigravity-home"
       ],
       "dependencies": [
         "workflow-quality"
@@ -603,7 +618,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "antigravity-home"
       ],
       "dependencies": [
         "platform-configs"
@@ -643,7 +659,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "antigravity-home"
       ],
       "dependencies": [
         "platform-configs"
@@ -689,7 +706,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "antigravity-home"
       ],
       "dependencies": [
         "platform-configs"
@@ -718,7 +736,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "antigravity-home"
       ],
       "dependencies": [
         "research-apis",
@@ -749,7 +768,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "antigravity-home"
       ],
       "dependencies": [],
       "defaultInstall": false,
@@ -759,7 +779,7 @@
     {
       "id": "ito-compute",
       "kind": "skills",
-      "description": "Authenticated It\u00f4 GPU inventory, RFQ, status, device revocation, and explicitly gated node-qualification workflows through the separately installed canonical CLI.",
+      "description": "Authenticated Itô GPU inventory, RFQ, status, device revocation, and explicitly gated node-qualification workflows through the separately installed canonical CLI.",
       "paths": [
         "skills/ito-compute",
         "skills/ito-inference",
@@ -781,7 +801,8 @@
         "hermes",
         "openclaw",
         "kimi",
-        "adal"
+        "adal",
+        "antigravity-home"
       ],
       "dependencies": [
         "platform-configs"
@@ -812,7 +833,8 @@
         "zed",
         "hermes",
         "openclaw",
-        "kimi"
+        "kimi",
+        "antigravity-home"
       ],
       "dependencies": [
         "platform-configs"
@@ -841,7 +863,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "antigravity-home"
       ],
       "dependencies": [
         "business-content"
@@ -877,7 +900,9 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "antigravity",
+        "antigravity-home"
       ],
       "dependencies": [
         "platform-configs"
@@ -939,7 +964,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "antigravity-home"
       ],
       "dependencies": [
         "platform-configs"
@@ -1003,7 +1029,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "antigravity-home"
       ],
       "dependencies": [
         "platform-configs"
@@ -1046,7 +1073,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "antigravity-home"
       ],
       "dependencies": [
         "platform-configs"
@@ -1076,7 +1104,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "antigravity-home"
       ],
       "dependencies": [
         "framework-language",
@@ -1114,7 +1143,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "antigravity-home"
       ],
       "dependencies": [
         "platform-configs"
@@ -1142,7 +1172,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "antigravity-home"
       ],
       "dependencies": [
         "platform-configs"
@@ -1380,7 +1411,8 @@
         "hermes",
         "openclaw",
         "kimi",
-        "adal"
+        "adal",
+        "antigravity-home"
       ],
       "dependencies": [
         "workflow-quality"
@@ -1411,7 +1443,8 @@
         "hermes",
         "openclaw",
         "kimi",
-        "adal"
+        "adal",
+        "antigravity-home"
       ],
       "dependencies": [
         "workflow-quality"
@@ -1445,7 +1478,8 @@
         "kimi",
         "adal",
         "codex",
-        "gemini"
+        "gemini",
+        "antigravity-home"
       ],
       "dependencies": [],
       "defaultInstall": false,

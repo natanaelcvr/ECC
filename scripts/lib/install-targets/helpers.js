@@ -74,6 +74,7 @@ const PLATFORM_SOURCE_PATH_OWNERS = Object.freeze({
   '.qwen': 'qwen',
   '.zed': 'zed',
   '.adal': 'adal',
+  '.antigravity-plugin': 'antigravity',
 });
 
 // Source paths that home installs must never copy into a harness home
@@ -96,6 +97,9 @@ function isForeignPlatformPath(sourceRelativePath, adapterTarget) {
 
   for (const [prefix, ownerTarget] of Object.entries(PLATFORM_SOURCE_PATH_OWNERS)) {
     if (normalizedPath === prefix || normalizedPath.startsWith(`${prefix}/`)) {
+      if (ownerTarget === 'antigravity' && (adapterTarget === 'antigravity' || adapterTarget === 'antigravity-home')) {
+        return false;
+      }
       return ownerTarget !== adapterTarget;
     }
   }

@@ -103,16 +103,23 @@ const HARNESS_CAPABILITIES = deepFreeze([
   },
   {
     id: 'antigravity',
-    label: 'Antigravity',
-    targetIds: ['antigravity'],
-    channel: 'managed-project',
-    installMode: 'managed-project',
-    guidedReady: false,
-    availability: 'advanced',
-    destination: './.agents',
-    scopes: [scope('project', 'antigravity', './.agents')],
-    hooks: hooks('not-configured', false, 'ECC hooks are not configured by this adapter.'),
-    aliases: ['google-antigravity'],
+    label: 'Google Antigravity',
+    targetIds: ['antigravity', 'antigravity-home'],
+    channel: 'native-plugin',
+    installMode: 'native-plugin',
+    guidedReady: true,
+    availability: 'guided',
+    destination: '~/.gemini/config/plugins/ecc or ./.agents',
+    scopes: [
+      scope('user', 'antigravity-home', '~/.gemini/config/plugins/ecc'),
+      scope('project', 'antigravity', './.agents'),
+    ],
+    hooks: hooks(
+      'profile-selection',
+      true,
+      'ECC hooks are configured through native Antigravity hooks.json and cross-platform dispatcher.'
+    ),
+    aliases: ['google-antigravity', 'antigravity-ide', 'xcode-antigravity'],
   },
   {
     id: 'copilot',

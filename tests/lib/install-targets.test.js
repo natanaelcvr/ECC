@@ -553,6 +553,67 @@ function runTests() {
     );
   })) passed++; else failed++;
 
+  if (test('resolves antigravity-home adapter root and install-state path from home dir', () => {
+    const adapter = getInstallTargetAdapter('antigravity-home');
+    const homeDir = path.resolve('/Users/example');
+    const root = adapter.resolveRoot({ homeDir, repoRoot: '/repo/ecc' });
+    const statePath = adapter.getInstallStatePath({ homeDir, repoRoot: '/repo/ecc' });
+
+    assert.strictEqual(root, path.join(homeDir, '.gemini', 'config', 'plugins', 'ecc'));
+    assert.strictEqual(statePath, path.join(homeDir, '.gemini', 'config', 'plugins', 'ecc', 'ecc-install-state.json'));
+  })) passed++; else failed++;
+
+  if (test('plans global Antigravity plugin with hooks, plugin manifest, and dispatcher', () => {
+    const repoRoot = path.join(__dirname, '..', '..');
+    const homeDir = path.resolve('/Users/example');
+
+    const plan = planInstallTargetScaffold({
+      target: 'antigravity-home',
+      repoRoot,
+      homeDir,
+      modules: [
+        {
+          id: 'hooks-runtime',
+          paths: ['hooks', 'scripts/hooks'],
+        },
+        {
+          id: 'platform-configs',
+          paths: ['.antigravity-plugin'],
+        },
+        {
+          id: 'workflow-quality',
+          paths: ['skills/tdd-workflow'],
+        },
+      ],
+    });
+
+    const pluginDir = path.join(homeDir, '.gemini', 'config', 'plugins', 'ecc');
+
+    assert.ok(
+      plan.operations.some(operation => (
+        operation.sourceRelativePath === 'hooks/antigravity-hooks.json'
+        && operation.destinationPath === path.join(pluginDir, 'hooks.json')
+      )),
+      'Should install Antigravity hooks into plugin root'
+    );
+
+    assert.ok(
+      plan.operations.some(operation => (
+        operation.sourceRelativePath === '.antigravity-plugin/plugin.json'
+        && operation.destinationPath === path.join(pluginDir, 'plugin.json')
+      )),
+      'Should install Antigravity plugin.json manifest'
+    );
+
+    assert.ok(
+      plan.operations.some(operation => (
+        operation.sourceRelativePath === 'skills/tdd-workflow'
+        && operation.destinationPath === path.join(pluginDir, 'skills', 'tdd-workflow')
+      )),
+      'Should install skills under plugin skills directory'
+    );
+  })) passed++; else failed++;
+
   if (test('exposes validate and planOperations on adapters', () => {
     const claudeAdapter = getInstallTargetAdapter('claude');
     const cursorAdapter = getInstallTargetAdapter('cursor');

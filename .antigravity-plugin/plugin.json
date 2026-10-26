@@ -1,0 +1,24 @@
+{
+  "name": "ecc",
+  "version": "2.2.3",
+  "description": "Everything Claude Code & Antigravity (ECC): 71 agents, 311 skills, 97 workflows, native lifecycle hooks, GateGuard safety enforcement, and cross-platform operator tooling for Google Antigravity and Xcode.",
+  "author": {
+    "name": "ECC Contributors"
+  },
+  "homepage": "https://github.com/affaan-m/ECC",
+  "repository": "https://github.com/affaan-m/ECC",
+  "license": "MIT",
+  "keywords": [
+    "antigravity",
+    "xcode",
+    "agents",
+    "skills",
+    "hooks",
+    "rules",
+    "tdd",
+    "code-review",
+    "security",
+    "workflow",
+    "automation"
+  ]
+}
