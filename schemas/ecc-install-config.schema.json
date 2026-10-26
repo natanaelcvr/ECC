@@ -41,6 +41,13 @@
       "type": "string",
       "pattern": "^[a-z0-9-]+$"
     },
+    "profiles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9-]+$"
+      }
+    },
     "modules": {
       "type": "array",
       "items": {

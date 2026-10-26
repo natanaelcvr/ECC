@@ -46,15 +46,22 @@ function parseInstallArgs(argv) {
       parsed.configPath = args[index + 1] || null;
       index += 1;
     } else if (arg === '--profile' || arg === '--profiles') {
-      const raw = args[index + 1] || '';
-      if (raw.trim()) {
-        profileIds.push(...raw.split(','));
+      while (index + 1 < args.length && !args[index + 1].startsWith('--')) {
+        const raw = args[index + 1] || '';
+        if (raw.trim()) {
+          profileIds.push(...raw.split(','));
+        }
+        index += 1;
       }
-      index += 1;
     } else if (arg === '--modules') {
-      const raw = args[index + 1] || '';
-      parsed.moduleIds = dedupeStrings(raw.split(','));
-      index += 1;
+      while (index + 1 < args.length && !args[index + 1].startsWith('--')) {
+        const raw = args[index + 1] || '';
+        if (raw.trim()) {
+          parsed.moduleIds.push(...dedupeStrings(raw.split(',')));
+        }
+        index += 1;
+      }
+      parsed.moduleIds = dedupeStrings(parsed.moduleIds);
     } else if (arg === '--with') {
       const componentId = args[index + 1] || '';
       if (componentId.trim()) {

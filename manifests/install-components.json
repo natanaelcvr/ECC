@@ -54,7 +54,7 @@
       "family": "language",
       "description": "TypeScript and frontend/backend application-engineering guidance. Currently resolves through the shared framework-language module.",
       "modules": [
-        "framework-language"
+        "framework-frontend"
       ]
     },
     {
@@ -62,7 +62,7 @@
       "family": "language",
       "description": "Python and Django-oriented engineering guidance. Currently resolves through the shared framework-language module.",
       "modules": [
-        "framework-language"
+        "framework-python"
       ]
     },
     {
@@ -70,7 +70,7 @@
       "family": "language",
       "description": "Go-focused coding and testing guidance. Currently resolves through the shared framework-language module.",
       "modules": [
-        "framework-language"
+        "framework-systems"
       ]
     },
     {
@@ -78,7 +78,7 @@
       "family": "language",
       "description": "Java and Spring application guidance. Currently resolves through the shared framework-language module.",
       "modules": [
-        "framework-language"
+        "framework-java"
       ]
     },
     {
@@ -86,7 +86,7 @@
       "family": "framework",
       "description": "Angular-focused engineering guidance and rules. Currently resolves through the shared framework-language module.",
       "modules": [
-        "framework-language"
+        "framework-frontend"
       ]
     },
     {
@@ -94,7 +94,7 @@
       "family": "framework",
       "description": "React-focused engineering guidance. Currently resolves through the shared framework-language module.",
       "modules": [
-        "framework-language"
+        "framework-frontend"
       ]
     },
     {
@@ -102,7 +102,7 @@
       "family": "framework",
       "description": "Vue.js, Nuxt, Pinia, and Vue Router engineering guidance. Currently resolves through the shared framework-language module.",
       "modules": [
-        "framework-language"
+        "framework-frontend"
       ]
     },
     {
@@ -110,7 +110,7 @@
       "family": "framework",
       "description": "Next.js-focused engineering guidance. Currently resolves through the shared framework-language module.",
       "modules": [
-        "framework-language"
+        "framework-frontend"
       ]
     },
     {
@@ -118,7 +118,7 @@
       "family": "framework",
       "description": "Django-focused engineering guidance. Currently resolves through the shared framework-language module.",
       "modules": [
-        "framework-language"
+        "framework-python"
       ]
     },
     {
@@ -126,7 +126,7 @@
       "family": "framework",
       "description": "Spring Boot-focused engineering guidance. Currently resolves through the shared framework-language module.",
       "modules": [
-        "framework-language"
+        "framework-java"
       ]
     },
     {
@@ -134,7 +134,7 @@
       "family": "framework",
       "description": "Quarkus-focused engineering guidance for REST, Panache, security, testing, and verification.",
       "modules": [
-        "framework-language",
+        "framework-java",
         "security"
       ]
     },
@@ -213,7 +213,7 @@
     {
       "id": "capability:ito-compute",
       "family": "capability",
-      "description": "Authenticated It\u00f4 GPU inventory, RFQ, status, device revocation, and explicitly gated node-qualification workflows through the separately installed canonical CLI.",
+      "description": "Authenticated Itô GPU inventory, RFQ, status, device revocation, and explicitly gated node-qualification workflows through the separately installed canonical CLI.",
       "modules": [
         "ito-compute"
       ]
@@ -263,7 +263,7 @@
       "family": "language",
       "description": "C++ coding standards and testing guidance. Currently resolves through the shared framework-language module.",
       "modules": [
-        "framework-language"
+        "framework-systems"
       ]
     },
     {
@@ -271,7 +271,7 @@
       "family": "language",
       "description": "C engineering guidance using the shared C/C++ standards and testing stack. Currently resolves through the shared framework-language module.",
       "modules": [
-        "framework-language"
+        "framework-systems"
       ]
     },
     {
@@ -279,7 +279,7 @@
       "family": "language",
       "description": "Kotlin, Ktor, Exposed, Coroutines, and Compose Multiplatform guidance. Currently resolves through the shared framework-language module.",
       "modules": [
-        "framework-language"
+        "framework-java"
       ]
     },
     {
@@ -287,7 +287,7 @@
       "family": "language",
       "description": "HarmonyOS, ArkTS, and ArkUI development guidance including V2 state management, Navigation routing, and HarmonyOS API best practices.",
       "modules": [
-        "framework-language"
+        "framework-frontend"
       ]
     },
     {
@@ -295,7 +295,7 @@
       "family": "language",
       "description": "Modern Perl patterns, testing, and security guidance. Currently resolves through framework-language and security modules.",
       "modules": [
-        "framework-language",
+        "framework-misc",
         "security"
       ]
     },
@@ -304,7 +304,7 @@
       "family": "language",
       "description": "Ruby and Rails coding, testing, and security guidance. Resolves through framework-language and security modules.",
       "modules": [
-        "framework-language",
+        "framework-misc",
         "security"
       ]
     },
@@ -313,7 +313,7 @@
       "family": "framework",
       "description": "Rails 8 application guidance for MVC, Hotwire, Solid Queue/Cache/Cable, authentication, testing, and security.",
       "modules": [
-        "framework-language",
+        "framework-misc",
         "security"
       ]
     },
@@ -322,7 +322,7 @@
       "family": "language",
       "description": "Rust patterns and testing guidance. Currently resolves through the shared framework-language module.",
       "modules": [
-        "framework-language"
+        "framework-systems"
       ]
     },
     {
@@ -330,7 +330,7 @@
       "family": "language",
       "description": "C# coding standards and patterns guidance. Currently resolves through the shared framework-language module.",
       "modules": [
-        "framework-language"
+        "framework-systems"
       ]
     },
     {
@@ -338,7 +338,7 @@
       "family": "language",
       "description": "F# functional patterns and testing guidance. Currently resolves through the shared framework-language module.",
       "modules": [
-        "framework-language"
+        "framework-systems"
       ]
     },
     {
@@ -346,7 +346,7 @@
       "family": "framework",
       "description": "Laravel patterns, TDD, verification, and security guidance. Resolves through framework-language and security modules.",
       "modules": [
-        "framework-language",
+        "framework-misc",
         "security"
       ]
     },
@@ -571,7 +571,7 @@
       "family": "skill",
       "description": "React and frontend engineering patterns.",
       "modules": [
-        "framework-language"
+        "framework-frontend"
       ]
     },
     {
@@ -579,7 +579,7 @@
       "family": "skill",
       "description": "Vue.js 3 Composition API, reactivity, Pinia, Vue Router, and Nuxt SSR patterns.",
       "modules": [
-        "framework-language"
+        "framework-frontend"
       ]
     },
     {
